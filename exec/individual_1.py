@@ -7,11 +7,12 @@ from datetime import datetime
 import argparse
 import os.path
 
+
 def print_help():
     """
     Функция вывода доступных пользователю команд
     """
-    
+
     print("list - вывод всех добавленных записей")
     print("add - добавление новых записей")
     print("find - найти запись по фамилии")
@@ -22,7 +23,7 @@ def add_worker(workers, surname, name, phone, date):
     """
     Функция добавления новой записи, возвращает запись
     """
-        
+
     workers.append(
         {
             "surname": surname,
@@ -31,7 +32,7 @@ def add_worker(workers, surname, name, phone, date):
             'date': date
         }
     )
-    
+
     return workers
 
 
@@ -39,18 +40,18 @@ def print_list(list):
     """
     Функция выводит на экран список всех существующих записей
     """
-    
+
     for member in list:
         print(f"{member['surname']} {member['name']} | "
-                f"{member['phone']} | {member['date']}")
-        
+              f"{member['phone']} | {member['date']}")
+
 
 def find_member(workers, period):
     """
     Функция для вывода на экран всех записей, чьи фамилии совпадают
     с введённой (не возвращает никаких значений)
     """
-    
+
     count = 0
     members = []
 
@@ -59,7 +60,7 @@ def find_member(workers, period):
         if datetime.now().year - period >= year:
             members.append(member)
             count += 1
-        
+
     if count == 0:
         print("Записи не найдены")
     else:
@@ -81,7 +82,7 @@ def load_file(filename):
 
     with open(filename, "r", encoding="utf-8") as file:
         return json.load(file)
-    
+
 
 def parse_datetime(value):
     try:
@@ -190,7 +191,7 @@ def main(command_line=None):
             args.date
         )
         is_dirty = True
-    
+
     elif args.command == "display":
         print_list(workers)
 
@@ -216,4 +217,3 @@ if __name__ == "__main__":
     Основная программа
     """
     main()
-    
